@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Booking - ClickSpace</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">ClickSpace</div>
+  <nav>
+    <a href="home-login.html">Home</a>
+    <a href="layanan-login.html">Layanan</a>
+    <a href="booking-form.html">Booking</a>
+    <a href="status-empty.html">Riwayat</a>
+    <a href="index.html" class="btn-login">Logout</a>
+  </nav>
+</header>
+
+<main>
+  <section class="page-hero">
+    <h1>Form Booking Studio</h1>
+    <p>Lengkapi data booking, pilih layanan, jadwal, dan metode pembayaran.</p>
+  </section>
+
+  <section class="section">
+    <div class="form-layout">
+      <div class="form-box">
+        <form action="success.html">
+          <label>Nama Lengkap</label>
+          <input type="text" placeholder="Masukkan nama lengkap" required>
+
+          <label>No WhatsApp</label>
+          <input type="text" placeholder="Masukkan nomor WhatsApp" required>
+
+          <label>Layanan</label>
+          <select required>
+            <option value="">-- Pilih Layanan --</option>
+            <option>Self Photo - Rp50.000</option>
+            <option>Foto Keluarga - Rp150.000</option>
+            <option>Graduation - Rp100.000</option>
+            <option>Photobooth - Rp75.000</option>
+            <option>Prewedding - Rp300.000</option>
+            <option>Sewa Studio - Rp75.000/jam</option>
+          </select>
+
+          <label>Tanggal</label>
+          <input type="date" required>
+
+          <label>Jam</label>
+          <select required>
+            <option value="">-- Pilih Jam --</option>
+            <option>09.00 - 10.00</option>
+            <option>10.00 - 11.00</option>
+            <option>11.00 - 12.00</option>
+            <option>13.00 - 14.00</option>
+            <option>14.00 - 15.00</option>
+            <option>15.00 - 16.00</option>
+          </select>
+
+          <label>Metode Pembayaran</label>
+          <select required>
+            <option value="">-- Pilih Pembayaran --</option>
+            <option>Transfer Bank</option>
+            <option>DANA</option>
+            <option>OVO</option>
+            <option>QRIS</option>
+          </select>
+
+          <div class="payment-info">
+            <h4>Nomor Tujuan Pembayaran</h4>
+            <p><b>Transfer Bank:</b> BCA 1234567890 a.n. ClickSpace Studio</p>
+            <p><b>DANA:</b> 081234567890 a.n. ClickSpace Studio</p>
+            <p><b>OVO:</b> 081234567890 a.n. ClickSpace Studio</p>
+            <p><b>QRIS:</b> Tersedia di kasir studio / dikirim melalui WhatsApp admin</p>
+          </div>
+
+          <label>Bukti Pembayaran</label>
+          <input type="file" required>
+
+          <button type="submit" class="button full">Kirim Booking</button>
+        </form>
+      </div>
+
+      <div class="info-box">
+        <h3>Ringkasan Proses</h3>
+        <p>1. Pilih layanan foto.</p>
+        <p>2. Tentukan tanggal dan jam.</p>
+        <p>3. Pilih metode pembayaran.</p>
+        <p>4. Upload bukti pembayaran.</p>
+        <p>5. Setelah dikirim, booking masuk ke halaman berhasil.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2026 ClickSpace</p>
+</footer>
+
+</body>
+</html>
