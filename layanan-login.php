@@ -1,6 +1,14 @@
 <?php
 session_start();
+include "koneksi.php";
+
 $sudah_login = isset($_SESSION['id_user']);
+
+function rupiah($angka) {
+  return "Rp" . number_format($angka, 0, ',', '.');
+}
+
+$query_layanan = mysqli_query($conn, "SELECT * FROM layanan ORDER BY id_layanan ASC");
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +16,7 @@ $sudah_login = isset($_SESSION['id_user']);
 <head>
   <meta charset="UTF-8">
   <title>Layanan - ClickSpace</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=60">
 </head>
 <body>
 
@@ -40,7 +48,7 @@ $sudah_login = isset($_SESSION['id_user']);
     <div class="service-hero-content">
       <p class="service-label">CLICKSPACE STUDIO</p>
       <h1>Temukan Layanan Foto Terbaik</h1>
-      <p>Pilih paket foto sesuai kebutuhanmu, mulai dari self studio sampai prewedding.</p>
+      <p>Pilih paket foto sesuai kebutuhanmu di ClickSpace Studio.</p>
     </div>
   </section>
 
@@ -54,143 +62,55 @@ $sudah_login = isset($_SESSION['id_user']);
 
     <div class="service-grid">
 
-      <div class="service-card">
-        <div class="service-image">
-          <img src="images/self studio.jpg" alt="Self Studio">
-          <span>Favorit</span>
-        </div>
+      <?php if (mysqli_num_rows($query_layanan) > 0) { ?>
 
-        <div class="service-content">
-          <p class="service-location">ClickSpace Studio</p>
-          <h3>Self Studio</h3>
+        <?php while ($layanan = mysqli_fetch_assoc($query_layanan)) { ?>
 
-          <div class="service-info">
-            <span>30 Menit</span>
-            <span>2 Orang</span>
-            <span>Soft File</span>
+          <div class="service-card">
+            <div class="service-image">
+              <img 
+                src="<?php echo htmlspecialchars($layanan['gambar']); ?>" 
+                alt="<?php echo htmlspecialchars($layanan['nama_layanan']); ?>"
+              >
+
+              <span><?php echo htmlspecialchars($layanan['kategori']); ?></span>
+            </div>
+
+            <div class="service-content">
+              <p class="service-location">ClickSpace Studio</p>
+
+              <h3><?php echo htmlspecialchars($layanan['nama_layanan']); ?></h3>
+
+              <p class="service-desc">
+                <?php echo htmlspecialchars($layanan['deskripsi']); ?>
+              </p>
+
+              <div class="service-info">
+                <span><?php echo htmlspecialchars($layanan['durasi']); ?></span>
+                <span><?php echo htmlspecialchars($layanan['kapasitas']); ?></span>
+                <span><?php echo htmlspecialchars($layanan['fasilitas']); ?></span>
+              </div>
+
+              <div class="service-bottom">
+                <strong><?php echo rupiah($layanan['harga']); ?></strong>
+
+                <a href="detail-layanan.php?id=<?php echo htmlspecialchars($layanan['id_layanan']); ?>">
+                  Lihat Detail →
+                </a>
+              </div>
+            </div>
           </div>
 
-          <div class="service-bottom">
-            <strong>Rp50.000</strong>
-            <a href="detail-layanan.php?id=1">Lihat Detail →</a>
-          </div>
-        </div>
-      </div>
+        <?php } ?>
 
-      <div class="service-card">
-        <div class="service-image">
-          <img src="images/foto keluarga.jpg" alt="Foto Keluarga">
-          <span>Family</span>
+      <?php } else { ?>
+
+        <div class="empty-box">
+          <h3>Belum Ada Layanan</h3>
+          <p>Data layanan belum tersedia.</p>
         </div>
 
-        <div class="service-content">
-          <p class="service-location">ClickSpace Studio</p>
-          <h3>Foto Keluarga</h3>
-
-          <div class="service-info">
-            <span>45 Menit</span>
-            <span>4-6 Orang</span>
-            <span>Soft File</span>
-          </div>
-
-          <div class="service-bottom">
-            <strong>Rp150.000</strong>
-            <a href="detail-layanan.php?id=2">Lihat Detail →</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-image">
-          <img src="images/graduation.jpg" alt="Graduation">
-          <span>Graduation</span>
-        </div>
-
-        <div class="service-content">
-          <p class="service-location">ClickSpace Studio</p>
-          <h3>Graduation</h3>
-
-          <div class="service-info">
-            <span>40 Menit</span>
-            <span>1-2 Orang</span>
-            <span>Soft File</span>
-          </div>
-
-          <div class="service-bottom">
-            <strong>Rp100.000</strong>
-            <a href="detail-layanan.php?id=3">Lihat Detail →</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-image">
-          <img src="images/fotobooth.jpg" alt="Photobooth">
-          <span>Event</span>
-        </div>
-
-        <div class="service-content">
-          <p class="service-location">ClickSpace Studio</p>
-          <h3>Photobooth</h3>
-
-          <div class="service-info">
-            <span>30 Menit</span>
-            <span>Acara</span>
-            <span>Cetak Foto</span>
-          </div>
-
-          <div class="service-bottom">
-            <strong>Rp75.000</strong>
-            <a href="detail-layanan.php?id=4">Lihat Detail →</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-image">
-          <img src="images/prewed.jpg" alt="Prewedding">
-          <span>Couple</span>
-        </div>
-
-        <div class="service-content">
-          <p class="service-location">ClickSpace Studio</p>
-          <h3>Prewedding</h3>
-
-          <div class="service-info">
-            <span>90 Menit</span>
-            <span>2 Orang</span>
-            <span>Editing</span>
-          </div>
-
-          <div class="service-bottom">
-            <strong>Rp300.000</strong>
-            <a href="detail-layanan.php?id=5">Lihat Detail →</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-image">
-          <img src="images/studio.jpg" alt="Sewa Studio">
-          <span>Studio</span>
-        </div>
-
-        <div class="service-content">
-          <p class="service-location">ClickSpace Studio</p>
-          <h3>Sewa Studio</h3>
-
-          <div class="service-info">
-            <span>Per Jam</span>
-            <span>Indoor</span>
-            <span>Properti</span>
-          </div>
-
-          <div class="service-bottom">
-            <strong>Rp75.000/jam</strong>
-            <a href="detail-layanan.php?id=6">Lihat Detail →</a>
-          </div>
-        </div>
-      </div>
+      <?php } ?>
 
     </div>
 
