@@ -7,7 +7,7 @@ session_start();
 <head>
   <meta charset="UTF-8">
   <title>Login - ClickSpace</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=90">
 </head>
 <body class="auth-page">
 
@@ -18,20 +18,48 @@ session_start();
     <h1>Welcome Back!</h1>
     <p class="auth-subtitle">Login untuk mengakses booking studio dan melihat riwayat pemesananmu.</p>
 
-    <?php if (isset($_GET['error']) && $_GET['error'] === 'invalid') { ?>
-      <div class="auth-error">Email atau password salah.</div>
-    <?php } ?>
+    <?php if (isset($_GET['error'])) { ?>
+  <div class="auth-error-box">
+    <?php
+      if ($_GET['error'] == 'empty') {
+        echo "Email dan password wajib diisi.";
+      } elseif ($_GET['error'] == 'email') {
+        echo "Format email tidak valid.";
+      } elseif ($_GET['error'] == 'invalid') {
+        echo "Email atau password salah.";
+      } elseif ($_GET['error'] == 'role') {
+        echo "Role akun tidak valid.";
+      } elseif ($_GET['error'] == 'timeout') {
+        echo "Sesi kamu sudah berakhir karena tidak ada aktivitas. Silakan login kembali.";
+      } else {
+        echo "Login gagal. Silakan coba lagi.";
+      }
+    ?>
+  </div>
+<?php } ?>
 
-    <?php if (isset($_GET['success']) && $_GET['success'] === 'registered') { ?>
-      <div class="auth-success">Registrasi berhasil. Silakan login.</div>
+    <?php if (isset($_GET['success']) && $_GET['success'] == 'registered') { ?>
+      <div class="auth-success-box">
+        Registrasi berhasil. Silakan login.
+      </div>
     <?php } ?>
 
     <form action="proses_login.php" method="POST">
       <label>Email</label>
-      <input type="email" name="email" placeholder="Masukkan email" required>
+      <input 
+        type="email" 
+        name="email" 
+        placeholder="Masukkan email" 
+        required
+      >
 
       <label>Password</label>
-      <input type="password" name="password" placeholder="Masukkan password" required>
+      <input 
+        type="password" 
+        name="password" 
+        placeholder="Masukkan password" 
+        required
+      >
 
       <div class="auth-row">
         <label class="remember">
