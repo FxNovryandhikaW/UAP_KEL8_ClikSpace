@@ -19,18 +19,26 @@ session_start();
     <p class="auth-subtitle">Daftar akun untuk mulai melakukan booking studio foto di ClickSpace.</p>
 
     <?php if (isset($_GET['error'])) { ?>
-      <div class="auth-error">
-        <?php
-          if ($_GET['error'] === 'password') {
-            echo 'Password dan konfirmasi password tidak cocok.';
-          } elseif ($_GET['error'] === 'exists') {
-            echo 'Email sudah terdaftar.';
-          } else {
-            echo 'Gagal registrasi. Coba lagi.';
-          }
-        ?>
-      </div>
-    <?php } ?>
+  <div class="auth-error-box">
+    <?php
+      if ($_GET['error'] == 'empty') {
+        echo "Semua data wajib diisi.";
+      } elseif ($_GET['error'] == 'email') {
+        echo "Format email tidak valid.";
+      } elseif ($_GET['error'] == 'whatsapp') {
+        echo "Nomor WhatsApp harus berupa angka 10-15 digit.";
+      } elseif ($_GET['error'] == 'short') {
+        echo "Password minimal 6 karakter.";
+      } elseif ($_GET['error'] == 'password') {
+        echo "Konfirmasi password tidak sesuai.";
+      } elseif ($_GET['error'] == 'exists') {
+        echo "Email sudah terdaftar. Silakan login.";
+      } else {
+        echo "Registrasi gagal. Periksa kembali data kamu.";
+      }
+    ?>
+  </div>
+<?php } ?>
 
     <form action="proses_register.php" method="POST">
       <label>Nama Lengkap</label>
