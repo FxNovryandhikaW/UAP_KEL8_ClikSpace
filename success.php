@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "koneksi.php";
+include "config/koneksi.php";
 
 if (!isset($_GET['kode'])) {
   header("Location: home-login.php");
